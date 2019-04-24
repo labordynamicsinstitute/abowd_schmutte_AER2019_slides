@@ -1,0 +1,235 @@
+\documentclass[notes,11pt, aspectratio=169]{beamer}
+%based on https://github.com/paulgp/beamer-tips/blob/master/slides.tex
+
+% \mode<presentation>
+% {
+%\usetheme{Pittsburgh} %a footerless theme
+% \usetheme{Madrid}
+% alternative, could always use
+  %\usetheme{Rochester}
+  %\usetheme{UGA}
+  % \usefonttheme[onlysmall]{structurebold}
+  % \useinnertheme[shadow=true]{rounded}
+    % \usecolortheme{beaver} % This could be varied: UGA or cornell
+  %\setbeamercolor{normal text}{fg=black}
+  %\setbeamercolor{structure}{fg=black}
+  % \setbeamercolor{structure}{bg=black}
+  % \setbeamercolor{titlelike}{fg=black}
+
+%
+% Use this when we want notes
+%
+% }
+
+\usepackage{pgfpages}
+% These slides also contain speaker notes. You can print just the slides,
+% just the notes, or both, depending on the setting below. Comment out the want
+% you want.
+\setbeameroption{hide notes} % Only slide
+%\setbeameroption{show only notes} % Only notes
+%\setbeameroption{show notes on second screen=right} % Both
+
+\usepackage{helvet}
+\usepackage[default]{lato}
+\usepackage{array}
+
+\setbeamertemplate{navigation symbols}{} %//removes the navigation symbols
+\setbeamertemplate{frametitle continuation}[from second][\insertcontinuationcountroman]  %//to eliminate Roman numerals on 'first' slide when using allowframebreaks
+
+%Bibliography options%
+\usepackage[comma]{natbib}
+\newcommand{\Cite}{\citet} % this for natbib
+\bibpunct{(}{)}{;}{a}{}{;} %set if using natbib
+
+
+\usepackage{tikz}
+\usepackage{verbatim}
+\setbeamertemplate{note page}{\pagecolor{yellow!5}\insertnote}
+\setbeamertemplate{footline}[frame number]
+\usetikzlibrary{positioning}
+\usetikzlibrary{snakes}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{matrix,shapes,arrows,fit,tikzmark}
+\usepackage{amsmath}
+\usepackage{mathpazo}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{multimedia}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bbm}
+\newcolumntype{d}[0]{D{.}{.}{5}}
+
+
+\usepackage{changepage}
+\usepackage{appendixnumberbeamer}
+\newcommand{\beginbackup}{
+   \newcounter{framenumbervorappendix}
+   \setcounter{framenumbervorappendix}{\value{framenumber}}
+   \setbeamertemplate{footline}
+   {
+     \leavevmode%
+     \hline
+     box{%
+       \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,right]{footlinecolor}%
+%         \insertframenumber  \hspace*{2ex} 
+       \end{beamercolorbox}}%
+     \vskip0pt%
+   }
+ }
+\newcommand{\backupend}{
+   \addtocounter{framenumbervorappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumbervorappendix}} 
+}
+
+
+\usepackage{graphicx}
+\usepackage[space]{grffile}
+\usepackage{booktabs}
+
+% These are my colors -- there are many like them, but these ones are mine.
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{RGB}{213,94,0}
+\definecolor{yellow}{RGB}{240,228,66}
+\definecolor{green}{RGB}{0,158,115}
+
+\hypersetup{
+  colorlinks=false,
+  linkbordercolor = {white},
+  linkcolor = {blue}
+}
+
+
+%% I use a beige off white for my background
+\definecolor{MyBackground}{RGB}{255,253,218}
+
+%% Uncomment this if you want to change the background color to something else
+% \setbeamercolor{background canvas}{bg=MyBackground}
+\setbeamercolor{background canvas}{bg=white}
+
+%% Change the bg color to adjust your transition slide background color!
+\newenvironment{transitionframe}{
+  \setbeamercolor{background canvas}{bg=yellow}
+  \begin{frame}}{
+    \end{frame}
+}
+
+% \setbeamercolor{frametitle}{fg=blue}
+% \setbeamercolor{title}{fg=black}
+% \setbeamertemplate{footline}[frame number]
+% \setbeamertemplate{navigation symbols}{} 
+% \setbeamertemplate{itemize items}{-}
+% \setbeamercolor{itemize item}{fg=blue}
+% \setbeamercolor{itemize subitem}{fg=blue}
+% \setbeamercolor{enumerate item}{fg=blue}
+% \setbeamercolor{enumerate subitem}{fg=blue}
+% \setbeamercolor{button}{bg=MyBackground,fg=blue,}
+
+
+
+% If you like road maps, rather than having clutter at the top, have a roadmap show up at the end of each section 
+% (and after your introduction)
+% Uncomment this is if you want the roadmap!
+% \AtBeginSection[]
+% {
+%    \begin{frame}
+%        \frametitle{Roadmap of Talk}
+%        \tableofcontents[currentsection]
+%    \end{frame}
+% }
+\setbeamercolor{section in toc}{fg=blue}
+\setbeamercolor{subsection in toc}{fg=red}
+\setbeamersize{text margin left=1em,text margin right=1em} 
+
+%-------------------- macros from TCILATEX.TEX --------------------------
+% macros for user - defined functions
+\def\limfunc#1{\mathop{\rm #1}}%
+\def\func#1{\mathop{\rm #1}\nolimits}%
+% macro for unit names
+\def\unit#1{\mathop{\rm #1}\nolimits}%
+\input{tcilatex}
+
+%-------------------- Common Math Operators ----------
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\corr}{Corr}
+\DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\F}{F}
+\DeclareMathOperator{\f}{f}
+\DeclareMathOperator{\J}{J}
+\DeclareMathOperator{\N}{N}
+\DeclareMathOperator{\K}{K}
+\DeclareMathOperator{\I}{I}
+\DeclareMathOperator{\PrP}{P}
+\DeclareMathOperator{\argmin}{argmin}
+%------------------------------------------------------
+  \newcommand\T{\rule{0pt}{2.6ex}} %more space in tables
+  \newcommand\B{\rule[-1.2ex]{0pt}{0pt}} %more space in tables
+  \newcommand\C{\rule{0pt}{0pt}}
+
+\newenvironment{wideitemize}{\itemize\addtolength{\itemsep}{10pt}}{\enditemize}
+
+\title[Economics of Privacy]{\textcolor{blue}{An Economic Analysis of Privacy Protection and Statistical Accuracy as Social Choices}}
+\author[Abowd \and Schmutte]{%
+  John~M.~Abowd\inst{1,3} \and
+  Ian~M.~Schmutte\inst{1,2}}
+\institute[U.S.\ Census Bureau, Cornell, UGA]{
+  \inst{1}%
+  U.S. Census Bureau%
+  \and
+  \inst{2}%
+  University of Georgia
+  \and
+  \inst{3}%
+  Cornell University
+
+ }
+\date[April 2019]{ Federal Reserve Board of Governors \\
+ April 24, 2019 \\ \ \\ \footnotesize{The views expressed in this talk are those of the authors and not the  U.S.\ Census Bureau.
+
+  }}
+
+
+\begin{document}
+%%% TIKZ STUFF
+\tikzset{   
+        every picture/.style={remember picture,baseline},
+        every node/.style={anchor=base,align=center,outer sep=1.5pt},
+        every path/.style={thick},
+        }
+\newcommand\marktopleft[1]{%
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-a) at (-.3em,.3em) {};%
+}
+\newcommand\markbottomright[2]{%
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-b) at (0em,0em) {};%
+}
+\tikzstyle{every picture}+=[remember picture] 
+\tikzstyle{mybox} =[draw=black, very thick, rectangle, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[draw=black,fill=red, text=white]
+%%%% END TIKZ STUFF
+
+
+\frame{\titlepage}
+\input{economics-of-privacy-slides_main.tex}
+
+%\section[References]{References}
+
+%\begin{frame}[allowframebreaks]
+
+%\frametitle{References}
+%\def\newblock{\hskip .11em plus .33em minus .07em} % important line
+%\bibliographystyle{dcu}
+%\bibliography{library}
+%\end{frame}%
+
+\end{document}
+
+
